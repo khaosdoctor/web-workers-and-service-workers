@@ -1,0 +1,78 @@
+html, body {
+  height: 100%;
+  font-family: sans-serif, arial, tahoma;
+  margin: 0;
+  padding: 0;
+  padding-top: 5px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.animated-container {
+  grid-area: animation;
+  position: absolute;
+  background-color: #fff;
+  top: 20%;
+  left: 0;
+  width: 200px;
+  height: 60px;
+  z-index: 0;
+  overflow: hidden;
+  border: solid 1px #000;
+  text-align: center;
+  color: #fff;
+  font-size: 1.8rem;
+  padding-top: 13px;
+}
+
+.animated-container span {
+  position: relative;
+  z-index: 2;
+}
+
+.animated {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 100%;
+  background: #f00;
+  z-index: 1;
+  border-left: solid 20px #f77;
+  box-shadow: -10px 0 0 0 #fbb, 10px 0 0 0 #fbb;
+  animation: slide 2s infinite linear;
+}
+
+@keyframes slide {
+  from {
+    left: -60px;
+  }
+  to {
+    left: 110%;
+  }
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-auto-rows: 25px auto;
+  grid-template-areas: "term ww nww" "result animation nothing";
+}
+
+.input label {
+  grid-area: term;
+}
+
+.nww {
+  grid-area: nww;
+}
+
+.ww {
+  grid-area: ww;
+}
+
+.result {
+  grid-area: result;
+}

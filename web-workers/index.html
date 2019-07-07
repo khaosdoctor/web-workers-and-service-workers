@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./main.css">
+  <title>Web Worker Example</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="input">
+      <label for="input-number">
+        <span>Digite o número de termos: </span>
+        <input type="number" name="input-number" placeholder="Digite o número de termos">
+      </label>
+    </div>
+
+    <button class="nww" onclick="runNoWW()">Executar sem Web Worker</button>
+    <button class="ww" onclick="runWithWW()">Executar com Web Worker</button>
+
+    <div class="result">
+      <label for="result">
+        <span>Resultado: </span>
+        <input type="text" name="result" disabled id="no-web-worker-result">
+      </label>
+    </div>
+
+    <div class="animated-container">
+      <span>CSS Animation</span>
+      <div class="animated"></div>
+    </div>
+  </div>
+
+  <script>
+    // Get the value of terms in the input
+    function getTerms() {
+      return parseInt(document.querySelector('input[name="input-number"]').value, 10) || 0
+    }
+
+    // Set the result to the input
+    function setResult(value) {
+      document.querySelector('#no-web-worker-result').value = value
+    }
+
+    // Base function
+    function fibonacci(n) {
+      if (n <= 1) return 1
+      return fibonacci(n - 1) + fibonacci(n - 2)
+    }
+
+    // Without web worker, just run the fibonacci function
+    function runNoWW() {
+      const result = fibonacci(getTerms())
+      setResult(result)
+    }
+
+    // With a web worker, instantiate a new worker with the worker file
+    // Set worker message handler
+    // Post a message to the worker with terms
+    function runWithWW() {
+      const worker = new Worker('./worker.js')
+      worker.onmessage = (message) => {
+        setResult(message.data.result)
+        worker.terminate()
+      }
+      worker.postMessage(getTerms())
+    }
+  </script>
+</body>
+
+</html>
