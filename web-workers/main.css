@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   height: 100%;
   font-family: sans-serif, arial, tahoma;
   margin: 0;
@@ -49,6 +50,7 @@ html, body {
   from {
     left: -60px;
   }
+
   to {
     left: 110%;
   }
@@ -58,7 +60,7 @@ html, body {
   display: grid;
   grid-template-columns: 33% 33% 33%;
   grid-auto-rows: 25px auto;
-  grid-template-areas: "term ww nww" "result animation nothing";
+  grid-template-areas: "term nww ww""result animation nothing";
 }
 
 .input label {

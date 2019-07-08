@@ -14,16 +14,16 @@
     <div class="input">
       <label for="input-number">
         <span>Digite o número de termos: </span>
-        <input type="number" name="input-number" placeholder="Digite o número de termos">
+        <input type="number" name="input-number" placeholder="Type the number of terms">
       </label>
     </div>
 
-    <button class="nww" onclick="runNoWW()">Executar sem Web Worker</button>
-    <button class="ww" onclick="runWithWW()">Executar com Web Worker</button>
+    <button class="nww" onclick="runNoWW()">Execute without Web Worker</button>
+    <button class="ww" onclick="runWithWW()">Execute with Web Worker</button>
 
     <div class="result">
       <label for="result">
-        <span>Resultado: </span>
+        <span>Result: </span>
         <input type="text" name="result" disabled id="no-web-worker-result">
       </label>
     </div>
@@ -61,6 +61,7 @@
     // Set worker message handler
     // Post a message to the worker with terms
     function runWithWW() {
+      setResult('Calculating...')
       const worker = new Worker('./worker.js')
       worker.onmessage = (message) => {
         setResult(message.data.result)

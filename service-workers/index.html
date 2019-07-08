@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" name="image-id" placeholder="Type a number" value="238">
+  <button id="fetch" onclick="fetchImage()">Submit</button>
+  <img src="https://picsum.photos/id/238/500/500" id="random-img">
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/sw.js').then(function (registration) {
+          // Registration was successful
+          console.log('ServiceWorker registration successful');
+        }, function (err) {
+          // Registration failed
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
+
+    function fetchImage() {
+      const id = document.querySelector('input[name="image-id"]').value
+      document.querySelector('img').src = `https://picsum.photos/id/${id}/500/500`
+    }
+  </script>
+</body>
+
+</html>
